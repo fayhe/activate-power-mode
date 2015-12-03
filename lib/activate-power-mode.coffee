@@ -50,8 +50,8 @@ module.exports = ActivatePowerMode =
 
   shake: ->
     intensity = 1 + 2 * Math.random()
-    x = intensity * (if Math.random() > 0.5 then -1 else 1)
-    y = intensity * (if Math.random() > 0.5 then -1 else 1)
+    x = 0.00001
+    y = 0.00001
 
     @editorElement.style.top = "#{y}px"
     @editorElement.style.left = "#{x}px"
@@ -83,9 +83,9 @@ module.exports = ActivatePowerMode =
     )
 
     if el
-      getComputedStyle(el).color
+      "rgb(" + Math.round(Math.random()*255) + "," +  Math.round(Math.random()*255) + "," + Math.round(Math.random()*255)+ ")"
     else
-      "rgb(255, 255, 255)"
+      "rgb(" + Math.round(Math.random()*255) + "," +  Math.round(Math.random()*255) + "," + Math.round(Math.random()*255) + ")"
 
   createParticle: (x, y, color) ->
     x: x
@@ -109,11 +109,16 @@ module.exports = ActivatePowerMode =
       particle.alpha *= 0.96
 
       @context.fillStyle = "rgba(#{particle.color[4...-1]}, #{particle.alpha})"
-      @context.fillRect(
-        Math.round(particle.x - 1.5)
-        Math.round(particle.y - 1.5)
-        3, 3
-      )
+
+      @context.beginPath()
+      @context.moveTo(particle.x+7.5,particle.y+4.0)
+      @context.bezierCurveTo(particle.x+7.5,particle.y+3.7,particle.x+7.0,particle.y+2.5,particle.x+5.0,particle.y+2.5)
+      @context.bezierCurveTo(particle.x+2.0,particle.y+2.5,particle.x+2.0,particle.y+6.25,particle.x+2.0,particle.y+6.25)
+      @context.bezierCurveTo(particle.x+2.0,particle.y+8.0,particle.x+4.0,particle.y+10.2,particle.x+7.5,particle.y+12.0)
+      @context.bezierCurveTo(particle.x+11.0,particle.y+10.2,particle.x+13.0,particle.y+8.0,particle.x+13.0,particle.y+6.25)
+      @context.bezierCurveTo(particle.x+13.0,particle.y+6.25,particle.x+13.0,particle.y+2.5,particle.x+10.0,particle.y+2.5)
+      @context.bezierCurveTo(particle.x+8.5,particle.y+2.5,particle.x+7.5,particle.y+3.7,particle.x+7.5,particle.y+4.0)
+      @context.fill()
 
   toggle: ->
     console.log 'ActivatePowerMode was toggled!'
