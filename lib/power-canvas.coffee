@@ -72,9 +72,9 @@ module.exports =
         @particles[@particlePointer] = @createParticle left, top, color
         @particlePointer = (@particlePointer + 1) % @getConfig("totalCount.max")
     else
-      if colorType == "fixed"
+      if colorType != "fixed"
         c = @getConfig "colours.fixed"
-        color = "rgb(#{c.red},#{c.green},#{c.blue})"
+        color = "rgb(255,102,163)"
       else
         color = @getColorAtPosition [screenPosition.row, screenPosition.column - 1]
       while numParticles--
@@ -131,11 +131,15 @@ module.exports =
 
       @context.fillStyle = "rgba(#{particle.color[4...-1]}, #{particle.alpha})"
       size = random @getConfig("size.min"), @getConfig("size.max"), true
-      @context.fillRect(
-        Math.round(particle.x - size / 2)
-        Math.round(particle.y - size / 2)
-        size, size
-      )
+      @context.beginPath()
+      @context.moveTo(particle.x+7.5,particle.y+4.0)
+      @context.bezierCurveTo(particle.x+7.5,particle.y+3.7,particle.x+7.0,particle.y+2.5,particle.x+5.0,particle.y+2.5)
+      @context.bezierCurveTo(particle.x+2.0,particle.y+2.5,particle.x+2.0,particle.y+6.25,particle.x+2.0,particle.y+6.25)
+      @context.bezierCurveTo(particle.x+2.0,particle.y+8.0,particle.x+4.0,particle.y+10.2,particle.x+7.5,particle.y+12.0)
+      @context.bezierCurveTo(particle.x+11.0,particle.y+10.2,particle.x+13.0,particle.y+8.0,particle.x+13.0,particle.y+6.25)
+      @context.bezierCurveTo(particle.x+13.0,particle.y+6.25,particle.x+13.0,particle.y+2.5,particle.x+10.0,particle.y+2.5)
+      @context.bezierCurveTo(particle.x+8.5,particle.y+2.5,particle.x+7.5,particle.y+3.7,particle.x+7.5,particle.y+4.0)
+      @context.fill()
 
     @context.globalCompositeOperation = gco
 

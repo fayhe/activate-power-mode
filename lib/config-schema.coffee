@@ -43,7 +43,7 @@ module.exports =
         title: "Combo Mode - Exclamation Texts"
         description: "Exclamations to show (randomized)."
         type: "array"
-        default: ["Super!", "Radical!", "Fantastic!", "Great!", "OMG", "Whoah!", ":O", "Nice!", "Splendid!", "Wild!", "Grand!", "Impressive!", "Stupendous!", "Extreme!", "Awesome!"]
+        default: ["傻擦!", "大傻擦!", "呵呵!", "呵呵哒!", "么么", "么么哒!", "棒棒", "棒棒哒", "机智!", "机智哒!", "吊吊吊", "吊爆啦!", "雅咩蝶!", "卡鸡嘛!"  ]
 
       opacity:
         title: "Combo Mode - Opacity"
@@ -85,7 +85,7 @@ module.exports =
         title: "Play Audio - Enabled"
         description: "Play audio clip on/off."
         type: "boolean"
-        default: false
+        default: true
 
       volume:
         title: "Play Audio - Volume"
